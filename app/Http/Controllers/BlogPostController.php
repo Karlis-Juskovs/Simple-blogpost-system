@@ -11,7 +11,9 @@ class BlogPostController extends Controller
 {
     public function home(): View
     {
-        return view('home');
+        return view('home', [
+            'blogPosts' => BlogPost::orderBy('created_at', 'desc')->paginate(20),
+        ]);
     }
 
     /**
