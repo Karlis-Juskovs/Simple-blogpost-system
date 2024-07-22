@@ -1,27 +1,17 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Home') }}
-        </h2>
+    @guest
+        <x-slot name="header">
+            <a href="{{ route('login') }}">
+                Log in
+            </a>
 
-        @if (Route::has('login'))
-            @guest
-                <a
-                    href="{{ route('login') }}"
-                >
-                    Log in
+            @if (Route::has('register'))
+                <a href="{{ route('register') }}">
+                    Register
                 </a>
-
-                @if (Route::has('register'))
-                    <a
-                        href="{{ route('register') }}"
-                    >
-                        Register
-                    </a>
-                @endif
-            @endguest
-        @endif
-    </x-slot>
+            @endif
+        </x-slot>
+    @endguest
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
