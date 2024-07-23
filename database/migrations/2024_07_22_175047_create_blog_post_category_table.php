@@ -18,6 +18,7 @@ return new class extends Migration
 
             $table->foreign('blog_post_id')->references('id')->on('blog_posts');
             $table->foreign('category_id')->references('id')->on('categories');
+            $table->unique('blog_post_id', 'category_id');
         });
     }
 

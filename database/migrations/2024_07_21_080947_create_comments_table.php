@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
             $table->text('content')->nullable(false);
             $table->unsignedBigInteger('owner_id')->nullable(false);
+            $table->unsignedBigInteger('blog_post_id')->nullable(false);
             $table->timestamps();
 
             $table->foreign('owner_id')->references('id')->on('users');
+            $table->foreign('blog_post_id')->references('id')->on('blog_posts');
         });
     }
 

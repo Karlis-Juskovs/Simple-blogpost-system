@@ -15,7 +15,11 @@
 
     <div class="py-12">
 
-        <x-ui.button label="Create new blog post" color="green"></x-ui.button>
+        <a href="{{ route('blog_post.create') }}" class="border-solid border-2 border-sky-500 bg-green-700">
+            Create new blog post
+        </a>
+
+{{--        <x-ui.button label="Create new blog post" color="green" route="{{ route('blog_post.create') }}"></x-ui.button>--}}
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
