@@ -6,14 +6,24 @@ use App\Http\Requests\StoreBlogPostRequest;
 use App\Http\Requests\UpdateBlogPostRequest;
 use App\Models\BlogPost;
 use App\Models\Category;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class BlogPostController extends Controller
 {
-    public function home(): View
+    public function home(Request $request): View
     {
+        $queryBuilder = BlogPost::query();
+
+        if ( $search = $request->input('search')) {
+            $queryBuilder = $queryBuilder->where('title', 'like', '%' . $search . '%')
+                ->orWhere('content', 'like', '%' . $search . '%');
+        }
+
         return view('home', [
-            'blogPosts' => BlogPost::orderBy('created_at', 'desc')->paginate(20),
+            'blogPosts' => $queryBuilder->orderBy('created_at', 'desc')
+                ->paginate(20),
+            'search' => $search
         ]);
     }
 
