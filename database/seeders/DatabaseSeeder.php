@@ -230,6 +230,7 @@ class DatabaseSeeder extends Seeder
             }
 
             if ($commentText) {
+                //multiple same entries are acceptable
                 $blogPost->comments()->create([
                     'content' => $commentText,
                     'owner_id' => $i % 2 ? $logen->id : $luthar->id
