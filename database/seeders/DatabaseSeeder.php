@@ -45,11 +45,11 @@ class DatabaseSeeder extends Seeder
 
         $luthar = User::firstOrNew($users[0]);
         $luthar->password = bcrypt('password1');
-        $luthar->saveQuietly();
+        $luthar->save();
 
-        $logen = User::firstOrCreate($users[1]);
+        $logen = User::firstOrNew($users[1]);
         $logen->password = bcrypt('password2');
-        $logen->saveQuietly();
+        $logen->save();
 
 
         $blogPosts = [

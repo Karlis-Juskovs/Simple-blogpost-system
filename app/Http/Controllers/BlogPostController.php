@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BlogPostRequest;
 use App\Models\BlogPost;
 use App\Models\Category;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -33,7 +34,7 @@ class BlogPostController extends Controller
         ]);
     }
 
-    public function store(BlogPostRequest $request)
+    public function store(BlogPostRequest $request): RedirectResponse
     {
         return redirect()->route('blog_post.edit', [
             'blogPost' => BlogPost::create($request->validated())
@@ -56,7 +57,7 @@ class BlogPostController extends Controller
         ]);
     }
 
-    public function update(BlogPostRequest $request, BlogPost $blogPost)
+    public function update(BlogPostRequest $request, BlogPost $blogPost): RedirectResponse
     {
         $blogPost->update($request->validated());
 
@@ -65,7 +66,7 @@ class BlogPostController extends Controller
         ]);
     }
 
-    public function destroy(BlogPost $blogPost)
+    public function destroy(BlogPost $blogPost): RedirectResponse
     {
         $blogPost->delete();
         return redirect()->route('home');
