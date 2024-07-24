@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [BlogPostController::class, 'home'])->name('home');
+Route::get('/blog_post/{blogPostId}/show', [BlogPostController::class, 'show'])->name('blog_post.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

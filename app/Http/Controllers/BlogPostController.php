@@ -27,6 +27,15 @@ class BlogPostController extends Controller
         ]);
     }
 
+    public function show(int $blogPostId): View
+    {
+
+
+        dd($blogPostId);
+
+        return view('test');
+    }
+
     public function create(): View
     {
         return view('blog_post.create', [
@@ -34,33 +43,21 @@ class BlogPostController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreBlogPostRequest $request)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(BlogPost $blogPost)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateBlogPostRequest $request, BlogPost $blogPost)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(BlogPost $blogPost)
     {
         //

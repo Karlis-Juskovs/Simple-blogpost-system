@@ -6,11 +6,9 @@
                     {{ __('Log in') }}
                 </a>
 
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}" class="text-blue-500 hover:text-blue-700">
-                        {{ __('Register') }}
-                    </a>
-                @endif
+                <a href="{{ route('register') }}" class="text-blue-500 hover:text-blue-700">
+                    {{ __('Register') }}
+                </a>
             </div>
         </x-slot>
     @endguest
@@ -19,7 +17,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="flex justify-between items-center mx-2 mb-4">
                 <form action="{{ route('home') }}" method="GET" class="flex-grow max-w-lg">
-                    <input type="text" name="search" placeholder="Search blog posts..." value="{{ $search }}" class="w-full px-4 py-2 border-2 border-gray-300 rounded-full">
+                    <input type="text" name="search" placeholder="{{ __('Search blog posts...') }}" value="{{ $search }}" class="w-full px-4 py-2 border-2 border-gray-300 rounded-full">
                 </form>
                 <a href="{{ route('blog_post.create') }}" class="ml-4 px-4 py-2 border-2 border-green-400 text-sm font-medium rounded-full hover:bg-green-400 focus:bg-green-600">
                     {{ __('Create new blog post') }}
@@ -32,7 +30,7 @@
                 <div class="p-6 text-gray-900">
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         @foreach ($blogPosts as $blogPost)
-                            <a href="{{ route($blogPost->user_id == auth()->id() ? 'blog_post.edit' : 'blog_post.show', $blogPost->id) }}" class="flex flex-col justify-between p-4 bg-gray-100 border border-gray-200 rounded-lg hover:bg-gray-200 h-full">
+                            <a href="{{ route('blog_post.show', $blogPost->id) }}" class="flex flex-col justify-between p-4 bg-gray-100 border border-gray-200 rounded-lg hover:bg-gray-200 h-full">
                                 <div>
                                     <h2 class="font-bold text-lg">{{ $blogPost->title }}</h2>
                                     <p class="text-sm text-gray-600">
