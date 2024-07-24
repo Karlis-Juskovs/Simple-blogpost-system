@@ -17,5 +17,17 @@ export default {
         },
     },
 
+    safelist: [
+        'border-gray-400',
+        'border-blue-400',
+        'border-red-400',
+        'hover:bg-gray-400',
+        'hover:bg-blue-400',
+        'hover:bg-red-400',
+        'focus:bg-gray-600',
+        'focus:bg-blue-600',
+        'focus:bg-red-600',
+    ],
+
     plugins: [forms],
 };

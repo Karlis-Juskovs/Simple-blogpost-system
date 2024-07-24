@@ -19,9 +19,7 @@
                 <form action="{{ route('home') }}" method="GET" class="flex-grow max-w-lg">
                     <input type="text" name="search" placeholder="{{ __('Search blog posts...') }}" value="{{ $search }}" class="w-full px-4 py-2 border-2 border-gray-300 rounded-full">
                 </form>
-                <a href="{{ route('blog_post.create') }}" class="ml-4 px-4 py-2 border-2 border-green-400 text-sm font-medium rounded-full hover:bg-green-400 focus:bg-green-600">
-                    {{ __('Create new blog post') }}
-                </a>
+                <x-ui.link-button :color="'green'" :label="__('Create new blog post')" :route="route('blog_post.create')"></x-ui.link-button>
             </div>
         </div>
 

@@ -45,11 +45,11 @@ class DatabaseSeeder extends Seeder
 
         $luthar = User::firstOrNew($users[0]);
         $luthar->password = bcrypt('password1');
-        $luthar->save();
+        $luthar->saveQuietly();
 
         $logen = User::firstOrCreate($users[1]);
         $logen->password = bcrypt('password2');
-        $logen->save();
+        $logen->saveQuietly();
 
 
         $blogPosts = [
@@ -182,7 +182,7 @@ class DatabaseSeeder extends Seeder
         for ($i = 0; $i < count($blogPosts); $i++) {
             $blogPost = BlogPost::firstOrNew($blogPosts[$i]);
             $blogPost->owner_id = $i % 2 ? $luthar->id : $logen->id;
-            $blogPost->save();
+            $blogPost->saveQuietly();
 
             $commentText = null;
             switch ($i % 10) {

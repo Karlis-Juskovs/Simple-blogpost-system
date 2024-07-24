@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreBlogPostRequest;
-use App\Http\Requests\UpdateBlogPostRequest;
+use App\Http\Requests\BlogPostRequest;
 use App\Models\BlogPost;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -15,47 +14,55 @@ class BlogPostController extends Controller
     {
         $queryBuilder = BlogPost::query();
 
-        if ( $search = $request->input('search')) {
+        if ($search = $request->input('search')) {
             $queryBuilder = $queryBuilder->where('title', 'like', '%' . $search . '%')
                 ->orWhere('content', 'like', '%' . $search . '%');
         }
 
         return view('home', [
-            'blogPosts' => $queryBuilder->orderBy('created_at', 'desc')
+            'blogPosts' => $queryBuilder->orderBy('created_at', 'asc')
                 ->paginate(20),
             'search' => $search
         ]);
     }
 
-    public function show(int $blogPostId): View
-    {
-
-
-        dd($blogPostId);
-
-        return view('test');
-    }
-
     public function create(): View
     {
         return view('blog_post.create', [
-            'categories' => Category::orderBy('name', 'desc')->get(),
+            'categories' => Category::orderBy('name', 'asc')->get(),
         ]);
     }
 
-    public function store(StoreBlogPostRequest $request)
+    public function store(BlogPostRequest $request)
     {
-        //
+        return redirect()->route('blog_post.edit', [
+            'blogPost' => BlogPost::create($request->validated())
+        ]);
     }
 
-    public function edit(BlogPost $blogPost)
+    public function show(BlogPost $blogPost): View
     {
-        //
+        return view('blog_post.show', [
+            'blogPost' => $blogPost,
+        ]);
     }
 
-    public function update(UpdateBlogPostRequest $request, BlogPost $blogPost)
+    public function edit(BlogPost $blogPost): View
     {
-        //
+        return view('blog_post.edit', [
+            'blogPost' => $blogPost,
+            'categories' => Category::orderBy('name', 'asc')->get(),
+            'assignCategories' => $blogPost->categories()->pluck('categories.id')->toArray(),
+        ]);
+    }
+
+    public function update(BlogPostRequest $request, BlogPost $blogPost)
+    {
+        $blogPost->update($request->validated());
+
+        return redirect()->route('blog_post.edit', [
+            'blogPost' => $blogPost
+        ]);
     }
 
     public function destroy(BlogPost $blogPost)

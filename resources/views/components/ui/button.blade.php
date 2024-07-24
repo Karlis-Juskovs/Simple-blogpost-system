@@ -1,3 +1,3 @@
-<a class="border-solid border-2 border-sky-500" style="color: {{ $color }}">
+<button type="submit" class="border-{{ $color }}-400 hover:bg-{{ $color }}-400 focus:bg-{{ $color }}-600 px-4 py-2 border-2 text-sm font-medium rounded-full ">
     {{ $label }}
-</a>
+</button>
