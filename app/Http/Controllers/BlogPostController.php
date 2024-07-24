@@ -20,7 +20,7 @@ class BlogPostController extends Controller
         }
 
         return view('home', [
-            'blogPosts' => $queryBuilder->orderBy('created_at', 'asc')
+            'blogPosts' => $queryBuilder->orderBy('created_at', 'desc')
                 ->paginate(20),
             'search' => $search
         ]);
@@ -67,6 +67,7 @@ class BlogPostController extends Controller
 
     public function destroy(BlogPost $blogPost)
     {
-        //
+        $blogPost->delete();
+        return redirect()->route('home');
     }
 }

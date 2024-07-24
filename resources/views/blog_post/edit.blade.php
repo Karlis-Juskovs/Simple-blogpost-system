@@ -64,12 +64,32 @@
                             <div class="flex justify-between max-w-7xl mx-auto sm:px-6 lg:px-8">
                                 <x-ui.link-button :color="'gray'" :label="__('Close')" :route="route('home')"></x-ui.link-button>
                                 <div>
-                                    <x-ui.link-button :color="'red'" :label="__('Delete')" :route="route('home')" :class="'mr-5'"></x-ui.link-button>
+                                    <x-ui.button
+                                        :color="'red'"
+                                        :label="__('Delete')"
+                                        :idName="'delete_blog_post_form'"
+                                        :class="'mr-5'"
+                                    ></x-ui.button>
                                     <x-ui.button :color="'green'" :label="__('Save')"></x-ui.button>
                                 </div>
                             </div>
                         </div>
                     </form>
+
+                    <form method="POST" action="{{ route('blog_post.destroy', ['blogPost' => $blogPost]) }}" id="delete_blog_post_form">
+                        @method('DELETE')
+                        @csrf
+                    </form>
+
+                    <div id="confirmModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50 hidden">
+                        <div class="bg-white p-6 rounded-lg shadow-lg">
+                            <p class="text-lg mb-4">Are you sure you want to delete this object?</p>
+                            <div class="flex justify-end">
+                                <button id="cancelDelete" class="px-4 py-2 bg-gray-500 text-white rounded mr-2">No</button>
+                                <button id="confirmDelete" class="px-4 py-2 bg-red-500 text-white rounded">Yes</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

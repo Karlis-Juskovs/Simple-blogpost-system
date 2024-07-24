@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="mt-4 text-gray-500 text-sm">
                                     <p>{{ __('By: ') . $blogPost->owner->name }}</p>
-                                    <p>{{ __('Published on: ') . $blogPost->created_at->format('M d, Y') }}</p>
+                                    <p>{{ __('Published on: ') . $blogPost->created_at->format('M d, Y H:i') . ' UTC' }}</p>
                                 </div>
                             </a>
                         @endforeach

@@ -45,6 +45,14 @@ class BlogPostObserver
     }
 
     /**
+     * Handle the BlogPost "deleting" event.
+     */
+    public function deleting(BlogPost $blogPost): void
+    {
+        $blogPost->categories()->detach();
+    }
+
+    /**
      * Handle the BlogPost "deleted" event.
      */
     public function deleted(BlogPost $blogPost): void
