@@ -76,4 +76,14 @@ class BlogPost extends Model
             ->orderBy('created_at', 'desc')
             ->paginate(5);
     }
+
+    public static function getBlogPostDashboardSummary(): array
+    {
+        $userId = auth()->id();
+
+        return [
+            'totalBlogPostCount' => self::where('owner_id', $userId)->count(),
+            'totalCommentCount' => Comment::where('owner_id', $userId)->count(),
+        ];
+    }
 }
