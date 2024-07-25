@@ -89,6 +89,7 @@
                             </div>
                         </div>
 
+                        {{-- For new comments --}}
                         @auth
                             <div class="mb-4">
                                 <form method="POST" action="{{ route('comment.store') }}">

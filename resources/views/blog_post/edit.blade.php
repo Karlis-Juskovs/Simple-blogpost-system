@@ -10,6 +10,7 @@
                         @method('PATCH')
 
                         <div class="p-6">
+                            {{-- Title --}}
                             <div class="mb-4">
                                 <label for="title"
                                        class="block text-sm font-medium text-gray-700">{{ __('Tile') }}</label>
@@ -23,6 +24,7 @@
                                 >
                             </div>
 
+                            {{-- Content --}}
                             <div class="mb-4">
                                 <label for="content"
                                        class="block text-sm font-medium text-gray-700">{{ __('Content') }}</label>
@@ -34,6 +36,7 @@
                                 >{{ old('content', $blogPost->content) }}</textarea>
                             </div>
 
+                            {{-- Existing categories checkbox selection --}}
                             <div class="mb-4">
                                 <label for="categories"
                                        class="block text-sm font-medium text-gray-700">{{ __('Existing categories') }}</label>
@@ -55,6 +58,7 @@
                                 @endisset
                             </div>
 
+                            {{-- New category --}}
                             <div class="mb-4">
                                 <label for="new_category"
                                        class="block text-sm font-medium text-gray-700">{{ __('Create and add new categories (separator ";")') }}</label>

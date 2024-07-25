@@ -16,8 +16,12 @@ class BlogPostController extends Controller
         $queryBuilder = BlogPost::query();
 
         if ($search = $request->input('search')) {
-            $queryBuilder = $queryBuilder->where('title', 'like', '%' . $search . '%')
-                ->orWhere('content', 'like', '%' . $search . '%');
+            $validated = $request->validate([
+                'search' => 'string|max:65',
+            ]);
+
+            $queryBuilder = $queryBuilder->where('title', 'like', '%' . $validated['search'] . '%')
+                ->orWhere('content', 'like', '%' . $validated['search'] . '%');
         }
 
         return view('home', [

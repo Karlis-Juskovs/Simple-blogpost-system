@@ -9,7 +9,13 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="flex justify-between items-center mx-2 mb-4">
                 <form action="{{ route('home') }}" method="GET" class="flex-grow max-w-lg">
-                    <input type="text" name="search" placeholder="{{ __('Search blog posts...') }}" value="{{ $search }}" class="w-full px-4 py-2 border-2 border-gray-300 rounded-full">
+                    <input class="w-full px-4 py-2 border-2 border-gray-300 rounded-full"
+                           type="text"
+                           name="search"
+                           placeholder="{{ __('Search blog posts...') }}"
+                           maxlength="65"
+                           value="{{ $search }}"
+                    >
                 </form>
                 <x-ui.link-button :color="'green'" :label="__('Create new blog post')" :route="route('blog_post.create')"></x-ui.link-button>
             </div>

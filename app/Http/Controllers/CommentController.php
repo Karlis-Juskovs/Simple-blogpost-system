@@ -14,8 +14,12 @@ class CommentController extends Controller
         $blogPostId = $request->input('blog_post_id');
         $blogPost = BlogPost::find($blogPostId);
 
+        $validated = $request->validate([
+            'content' => 'required|string',
+        ]);
+
         Comment::create([
-            'content' => $request->input('content'),
+            'content' => $validated['content'],
             'owner_id' => auth()->id(),
             'blog_post_id' => $blogPostId
         ]);

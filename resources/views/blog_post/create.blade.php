@@ -8,6 +8,7 @@
                     <form method="POST" action="{{ route('blog_post.store') }}">
                         @csrf
 
+                        {{-- Title --}}
                         <div class="p-6">
                             <div class="mb-4">
                                 <label for="title" class="block text-sm font-medium text-gray-700">{{ __('Tile') }}</label>
@@ -20,6 +21,7 @@
                                 >
                             </div>
 
+                            {{-- Content --}}
                             <div class="mb-4">
                                 <label for="content" class="block text-sm font-medium text-gray-700">{{ __('Content') }}</label>
                                 <textarea class="@error('content') border-red-500 @enderror mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
@@ -29,6 +31,7 @@
                                 >{{ old('content') }}</textarea>
                             </div>
 
+                            {{-- Checkbox selection for existing categories --}}
                             <div class="mb-4">
                                 <label for="categories" class="block text-sm font-medium text-gray-700">{{ __('Existing categories') }}</label>
 
@@ -41,6 +44,7 @@
                                 @endisset
                             </div>
 
+                            {{-- For new categories --}}
                             <div class="mb-4">
                                 <label for="new_category" class="block text-sm font-medium text-gray-700">{{ __('Create and add new categories (separator ";")') }}</label>
                                 <input class="mt-1 block w-1/4 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
