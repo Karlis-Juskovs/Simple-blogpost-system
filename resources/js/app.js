@@ -6,7 +6,7 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
-window.onload = (event) => {
+window.onload = () => {
     let formToDelete = null;
 
     // Handle delete button clicks

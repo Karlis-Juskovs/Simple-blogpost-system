@@ -52,9 +52,13 @@ class BlogPost extends Model
 
             foreach ($newCategories as $name) {
                 if (strlen($name) < 21) {
-                    $category = Category::firstOrCreate([
-                        'name' => $name
-                    ]);
+                    try {
+                        $category = Category::firstOrCreate([
+                            'name' => $name
+                        ]);
+                    } catch (\Exception $e) {
+                        // could fail if not unique
+                    }
 
                     $categoryIds[] = $category->id;
                 }
