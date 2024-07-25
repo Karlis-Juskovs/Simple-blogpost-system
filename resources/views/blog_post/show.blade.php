@@ -67,13 +67,15 @@
                                         {{ $comment->content }}
                                     </div>
 
-                                    <form method="POST" action="{{ route('comment.destroy', ['comment' => $comment]) }}"
-                                          id="{{ 'delete_comment_' . $comment->id }}">
-                                        @method('DELETE')
-                                        @csrf
+                                    @if($comment->isOwner())
+                                        <form method="POST" action="{{ route('comment.destroy', ['comment' => $comment]) }}"
+                                              id="{{ 'delete_comment_' . $comment->id }}">
+                                            @method('DELETE')
+                                            @csrf
 
-                                        <input type="hidden" name="blog_post_id" value="{{ $blogPost->id }}">
-                                    </form>
+                                            <input type="hidden" name="blog_post_id" value="{{ $blogPost->id }}">
+                                        </form>
+                                    @endif
                                 @endforeach
                             </div>
 
@@ -113,8 +115,12 @@
                     </div>
 
                     <div class="py-6 bg-gray-50 border-t border-gray-200">
-                        <div class="flex justify-start max-w-7xl mx-auto sm:px-6 lg:px-8">
+                        <div class="flex {{ $blogPost->isOwner() ? 'justify-between' : 'justify-start' }} max-w-7xl mx-auto sm:px-6 lg:px-8">
                             <x-ui.link-button :color="'gray'" :label="__('Close')" :route="route('home')"></x-ui.link-button>
+
+                            @if($blogPost->isOwner())
+                                <x-ui.link-button :color="'blue'" :label="__('Edit')" :route="route('blog_post.edit', $blogPost)"></x-ui.link-button>
+                            @endif
                         </div>
                     </div>
                 </div>

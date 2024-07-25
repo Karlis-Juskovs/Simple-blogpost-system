@@ -51,11 +51,13 @@ class BlogPost extends Model
             $newCategories = array_map(fn($item) => trim($item) ,$newCategories);
 
             foreach ($newCategories as $name) {
-                $category = Category::firstOrCreate([
-                    'name' => $name
-                ]);
+                if (strlen($name) < 21) {
+                    $category = Category::firstOrCreate([
+                        'name' => $name
+                    ]);
 
-                $categoryIds[] = $category->id;
+                    $categoryIds[] = $category->id;
+                }
             }
         }
 

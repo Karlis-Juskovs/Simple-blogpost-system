@@ -50,6 +50,7 @@
                                        placeholder="{{ __('ex. Parenting;Arts & Culture') }}"
                                        value="{{ old('new_category') }}"
                                 >
+                                <p class="block text-xs font-medium text-gray-700">{{ __('Note. Category can\'t be longer then 20 symbols') }}</p>
                             </div>
                         </div>
 
