@@ -184,7 +184,6 @@ class DatabaseSeeder extends Seeder
             $blogPost->owner_id = $i % 2 ? $luthar->id : $logen->id;
             $blogPost->saveQuietly();
 
-            $commentText = null;
             switch ($i % 10) {
                 case 1:
                     $categoryId = 2;
@@ -192,6 +191,7 @@ class DatabaseSeeder extends Seeder
                     break;
                 case 2:
                     $categoryId = 3;
+                    $commentText = 'This was an insightful post. Looking forward to reading more from you.';
                     break;
                 case 3:
                     $categoryId = 4;
@@ -199,6 +199,7 @@ class DatabaseSeeder extends Seeder
                     break;
                 case 4:
                     $categoryId = 5;
+                    $commentText = 'Good overview of the topic. I enjoyed reading it.';
                     break;
                 case 5:
                     $categoryId = 6;
@@ -210,6 +211,7 @@ class DatabaseSeeder extends Seeder
                     break;
                 case 7:
                     $categoryId = 8;
+                    $commentText = 'Your points are clearly presented. It was helpful to see this perspective.';
                     break;
                 case 8:
                     $categoryId = 9;
@@ -221,6 +223,7 @@ class DatabaseSeeder extends Seeder
                     break;
                 default:
                     $categoryId = 1;
+                    $commentText = 'Thanks for sharing this information. It was an interesting read.';
             }
 
             try {
@@ -229,13 +232,10 @@ class DatabaseSeeder extends Seeder
                 // duplicate entry
             }
 
-            if ($commentText) {
-                //multiple same entries are acceptable
-                $blogPost->comments()->create([
-                    'content' => $commentText,
-                    'owner_id' => $i % 2 ? $logen->id : $luthar->id
-                ]);
-            }
+            $blogPost->comments()->create([
+                'content' => $commentText,
+                'owner_id' => $i % 2 ? $logen->id : $luthar->id
+            ]);
         }
     }
 }
