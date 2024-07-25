@@ -15,7 +15,6 @@ window.onload = (event) => {
             const form_id = this.getAttribute('data-form_id');
             formToDelete = document.getElementById(form_id);
 
-            // Show the confirmation modal
             document.getElementById('confirmModal').classList.remove('hidden');
         });
     });
@@ -25,13 +24,11 @@ window.onload = (event) => {
         if (formToDelete) {
             formToDelete.submit();
         }
-        // Hide the modal
         document.getElementById('confirmModal').classList.add('hidden');
     });
 
     // Handle cancellation button click
     document.getElementById('cancelDelete').addEventListener('click', function() {
-        // Hide the modal
         document.getElementById('confirmModal').classList.add('hidden');
     });
 };

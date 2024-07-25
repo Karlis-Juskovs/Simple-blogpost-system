@@ -45,6 +45,7 @@ class BlogPostController extends Controller
     {
         return view('blog_post.show', [
             'blogPost' => $blogPost,
+            'comments' => $blogPost->getOrderedPaginatedComments(),
         ]);
     }
 

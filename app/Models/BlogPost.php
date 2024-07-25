@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Observers\BlogPostObserver;
 use App\Traits\HasOwner;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -67,5 +68,12 @@ class BlogPost extends Model
         $categoryIds = array_unique($categoryIds);
 
         $this->categories()->sync($categoryIds);
+    }
+
+    public function getOrderedPaginatedComments(): LengthAwarePaginator
+    {
+        return $this->comments()
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
     }
 }
