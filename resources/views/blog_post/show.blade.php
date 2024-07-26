@@ -40,54 +40,56 @@
                             </div>
                         </div>
 
-                        {{-- Comments --}}
-                        <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700">{{ __('Comments') }}</label>
+                        @if(isset($comments) && count($comments) > 0)
+                            {{-- Comments --}}
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700">{{ __('Comments') }}</label>
 
-                            {{-- Existing comments block --}}
-                            <div class="border p-4 mb-4">
-                                @foreach($comments as $comment)
-                                    @if (!$loop->first)
-                                        <hr class="my-4">
-                                    @endif
+                                {{-- Existing comments block --}}
+                                <div class="border p-4 mb-4">
+                                    @foreach($comments as $comment)
+                                        @if (!$loop->first)
+                                            <hr class="my-4">
+                                        @endif
 
-                                    <div class="flex justify-between items-center mb-2">
-                                        <span class="font-bold">{{ $comment->owner->name }}</span>
-                                        <span class="text-sm text-gray-500">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <span class="font-bold">{{ $comment->owner->name }}</span>
+                                            <span class="text-sm text-gray-500">
                                             @if($comment->isOwner())
-                                                <span
-                                                    class="text-red-500 hover:text-red-700 cursor-pointer mr-5 delete_object"
-                                                    data-form_id="{{ 'delete_comment_' . $comment->id }}"
-                                                >{{ __('delete comment') }}</span>
-                                            @endif
-                                            {{ $comment->created_at->format('M d, Y H:i') . ' UTC' }}
+                                                    <span
+                                                        class="text-red-500 hover:text-red-700 cursor-pointer mr-5 delete_object"
+                                                        data-form_id="{{ 'delete_comment_' . $comment->id }}"
+                                                    >{{ __('delete comment') }}</span>
+                                                @endif
+                                                {{ $comment->created_at->format('M d, Y H:i') . ' UTC' }}
                                         </span>
-                                    </div>
-                                    <div class="text-gray-700">
-                                        {{ $comment->content }}
-                                    </div>
+                                        </div>
+                                        <div class="text-gray-700">
+                                            {{ $comment->content }}
+                                        </div>
 
-                                    @if($comment->isOwner())
-                                        <form method="POST" action="{{ route('comment.destroy', ['comment' => $comment]) }}"
-                                              id="{{ 'delete_comment_' . $comment->id }}">
-                                            @method('DELETE')
-                                            @csrf
+                                        @if($comment->isOwner())
+                                            <form method="POST" action="{{ route('comment.destroy', ['comment' => $comment]) }}"
+                                                  id="{{ 'delete_comment_' . $comment->id }}">
+                                                @method('DELETE')
+                                                @csrf
 
-                                            <input type="hidden" name="blog_post_id" value="{{ $blogPost->id }}">
-                                        </form>
-                                    @endif
-                                @endforeach
+                                                <input type="hidden" name="blog_post_id" value="{{ $blogPost->id }}">
+                                            </form>
+                                        @endif
+                                    @endforeach
+                                </div>
+
+                                @auth
+                                    @include('modals.delete_object_confirmation')
+                                @endauth
+
+                                {{-- Pagination Links --}}
+                                <div class="mt-4">
+                                    {{ $comments->links() }}
+                                </div>
                             </div>
-
-                            @auth
-                                @include('modals.delete_object_confirmation')
-                            @endauth
-
-                            {{-- Pagination Links --}}
-                            <div class="mt-4">
-                                {{ $comments->links() }}
-                            </div>
-                        </div>
+                        @endif
 
                         {{-- For new comments --}}
                         @auth
